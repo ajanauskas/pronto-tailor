@@ -3,7 +3,7 @@ require 'pronto/tailor/version'
 require 'pronto/tailor/wrapper'
 
 module Pronto
-  class Tailor < Runner
+  class TailorRunner < Runner
     def initialize
     end
 
@@ -20,18 +20,19 @@ module Pronto
 
     def inspect(patch)
       offences = Tailor::Wrapper.new(patch).lint
-      offences.map do |_file_path, violations|
-        violations.map do |offence|
-          patch.added_lines.select { |line| line.new_lineno == offence['line'] }
-            .map { |line| new_message(offence, line) }
-        end
+      messages = []
+      offences.each do |offence|
+        messages += patch
+          .added_lines
+          .select { |line| line.new_lineno == offence['line'] }
+          .map { |line| new_message(offence, line) }
       end
+      messages.compact
     end
 
     def new_message(offence, line)
       path = line.patch.delta.new_file[:path]
-      level = :warning
-      Message.new(path, line, level, offence['message'])
+      Message.new(path, line, offence['level'].to_sym, offence['message'])
     end
 
     def swift_file?(path)
