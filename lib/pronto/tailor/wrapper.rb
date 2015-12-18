@@ -14,7 +14,7 @@ module Pronto
         stdout, stderr, _status = Open3.capture3("tailor \"#{path}\" #{params}")
         puts "WARN: pronto-tailor: #{stderr}" if stderr && stderr.size > 0
         return [] if stdout.nil? || stdout.size == 0
-        out
+        parse_output_in_file(path, stdout)
       rescue => e
         puts "ERROR: pronto-tailor failed to process a diff: #{e}"
         []
