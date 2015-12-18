@@ -10,7 +10,7 @@ module Pronto
       def lint
         return [] if @patch.nil?
         path = @patch.new_file_full_path.to_s
-        params = nil
+        params = '--except=trailing-whitespace'
         stdout, stderr, _status = Open3.capture3("tailor \"#{path}\" #{params}")
         puts "WARN: pronto-tailor: #{stderr}" if stderr && stderr.size > 0
         return [] if stdout.nil? || stdout.size == 0
