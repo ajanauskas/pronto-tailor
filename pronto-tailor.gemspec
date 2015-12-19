@@ -8,6 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Pronto::Tailor::VERSION
   spec.authors       = ["Andrius Janauskas"]
   spec.email         = ["andrius.janauskas@gmail.com"]
+  spec.homepage      = 'https://github.com/ajanauskas/pronto-tailor'
 
   spec.summary       = 'Pronto runner for Tailor, swift code analyzer'
   spec.license       = 'MIT'
