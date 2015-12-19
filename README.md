@@ -1,3 +1,5 @@
+![](https://travis-ci.org/ajanauskas/pronto-tailor.svg?branch=master)
+
 # Pronto::Tailor
 
 Pronto runner for [Tailor](https://github.com/sleekbyte/tailor), Swift static analyser and lint tool.
