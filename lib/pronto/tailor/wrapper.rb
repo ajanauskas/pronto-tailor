@@ -1,17 +1,19 @@
 require 'open3'
+require_relative 'configuration'
 
 module Pronto
   module Tailor
     class Wrapper
+      attr_reader :patch
       def initialize(patch)
         @patch = patch
       end
 
       def lint
-        return [] if @patch.nil?
-        path = @patch.new_file_full_path.to_s
-        params = '--except=trailing-whitespace'
-        stdout, stderr, _status = Open3.capture3("tailor \"#{path}\" #{params}")
+        return [] if patch.nil?
+        configuration = Configuration.new(ENV)
+        path = patch.new_file_full_path.to_s
+        stdout, stderr, _status = Open3.capture3(configuration.command_line_for_file(path))
         puts "WARN: pronto-tailor: #{stderr}" if stderr && stderr.size > 0
         return [] if stdout.nil? || stdout.size == 0
         parse_output_in_file(path, stdout)
@@ -19,6 +21,8 @@ module Pronto
         puts "ERROR: pronto-tailor failed to process a diff: #{e}"
         []
       end
+
+      private
 
       def parse_output_in_file(path, output)
         output.lines.map do |line|
