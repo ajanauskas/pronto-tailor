@@ -11,6 +11,12 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/ajanauskas/pronto-tailor'
 
   spec.summary       = 'Pronto runner for Tailor, swift code analyzer'
+  spec.description   = <<-EOF
+    A pronto runner for Tailor - Swift code analyzer. Pronto runs analysis quickly by checking only
+    the relevant changes. Created to be used on pull requests, but suited for other scenarios as well. Perfect
+    if you want to find out quickly if branch introduces changes that conform to
+    your styleguide, are DRY, don't introduce security holes and more.
+  EOF
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
