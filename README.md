@@ -2,7 +2,7 @@
 
 # Pronto::Tailor
 
-Pronto runner for [Tailor](https://github.com/sleekbyte/tailor), Swift static analyser and lint tool.
+[Pronto](https://github.com/mmozuras/pronto) runner for [Tailor](https://github.com/sleekbyte/tailor), Swift static analyser and lint tool.
 
 Tailor is needed to be installed for this runner to work.
 
